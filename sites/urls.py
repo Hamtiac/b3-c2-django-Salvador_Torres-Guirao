@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ListeSitesView
+from .views import ListeSitesView, ModifierSiteView
 from .views import ListeSitesView, AjouterSiteView
 
 

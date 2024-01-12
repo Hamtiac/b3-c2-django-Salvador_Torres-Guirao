@@ -17,7 +17,8 @@ class ListeSitesView(ListView):
 class AjouterSiteView(CreateView):
     form_class = AjouterSiteForm
     template_name = 'sites/ajouter_site.html'
-    success_url = '/sites/'  model = Site
+    success_url = '/sites/'
+    model = Site
 # Redirection après un ajout réussi
 
 class ModifierSiteView(UpdateView):
