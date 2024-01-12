@@ -7,7 +7,10 @@
     <h1>Liste des Sites</h1>
     <ul>
         {% for site in sites %}
-            <li>{{ site.nom }} - {{ site.url }} - {{ site.identifiant }} - {{ site.mot_de_passe }}</li>
+            <li>
+                {{ site.nom }} - {{ site.url }} - {{ site.identifiant }} - {{ site.mot_de_passe }}
+                <a href="{% url 'modifier_site' pk=site.pk %}">Modifier</a>
+            </li>
         {% endfor %}
     </ul>
     <a href="{% url 'ajouter_site' %}">Ajouter un site</a>
