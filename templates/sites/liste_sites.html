@@ -10,6 +10,7 @@
             <li>
                 {{ site.nom }} - {{ site.url }} - {{ site.identifiant }} - {{ site.mot_de_passe }}
                 <a href="{% url 'modifier_site' pk=site.pk %}">Modifier</a>
+                <a href="{% url 'supprimer_site' pk=site.pk %}">Supprimer</a>
             </li>
         {% endfor %}
     </ul>
