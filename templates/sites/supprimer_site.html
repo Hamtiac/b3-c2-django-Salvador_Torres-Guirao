@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supprimer un Site</title>
+</head>
+<body>
+    <h1>Confirmez la suppression du site "{{ object.nom }}"</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>Êtes-vous sûr de vouloir supprimer le site "{{ object.nom }}" ?</p>
+        <button type="submit">Oui, supprimer</button>
+    </form>
+</body>
+</html>
