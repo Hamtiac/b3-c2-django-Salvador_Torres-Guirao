@@ -18,8 +18,6 @@ class ListeSitesView(ListView):
     template_name = 'sites/liste_sites.html'
     context_object_name = 'sites'
 
-    def get_queryset(self):
-        return Site.objects.filter(user=self.request.user)
 
 
 class AjouterSiteView(CreateView):
