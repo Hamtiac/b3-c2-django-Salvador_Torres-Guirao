@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Liste des Sites</title>
-    <a href="{% url 'exporter_mots_de_passe_csv' %}">Exporter les mots de passe au format CSV</a>
-</head>
-<body>
-    <h1>Liste des Sites</h1>
-    <ul>
-        {% for site in sites %}
-            <li>
-                {{ site.nom }} - {{ site.url }} - {{ site.identifiant }} - {{ site.mot_de_passe }}
-                <a href="{% url 'modifier_site' pk=site.pk %}">Modifier</a>
-                <a href="{% url 'supprimer_site' pk=site.pk %}">Supprimer</a>
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'ajouter_site' %}">Ajouter un site</a>
-</body>
+    <head>
+        <title>Liste des Sites</title>
+    </head>
+    <body>
+        <h1>Liste des Sites</h1>
+        <a href="{% url 'exporter_mots_de_passe_csv' %}">Exporter les mots de passe au format CSV</a>
+        <div style="height: 30px"></div>
+        <form method="post" enctype="multipart/form-data" action="{% url 'importer_mots_de_passe_csv' %}">
+            {% csrf_token %}
+            <input type="file" name="csv_file" accept=".csv" required>
+            <button type="submit">Importer</button>
+        </form>
+        <div style="height: 50px"></div>
+        <ul>
+            {% for site in sites %}
+                <li>
+                    {{ site.nom }} - {{ site.url }} - {{ site.identifiant }} - {{ site.mot_de_passe }}
+                    <a href="{% url 'modifier_site' pk=site.pk %}">Modifier</a>
+                    <a href="{% url 'supprimer_site' pk=site.pk %}">Supprimer</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div style="height: 50px"></div>
+
+        <a href="{% url 'ajouter_site' %}">Ajouter un site</a>
+    </body>
 </html>
