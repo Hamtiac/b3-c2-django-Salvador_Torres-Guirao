@@ -4,7 +4,6 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.http import HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Site
 from .forms import AjouterSiteForm, ModifierSiteForm
 from django.contrib import messages
@@ -20,7 +19,6 @@ class ListeSitesView(ListView):
     model = Site
     template_name = 'sites/liste_sites.html'
     context_object_name = 'sites'
-
 
 
 class AjouterSiteView(CreateView):
