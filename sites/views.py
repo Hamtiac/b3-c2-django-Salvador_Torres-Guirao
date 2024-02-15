@@ -1,7 +1,9 @@
+import csv
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Site
 from .forms import AjouterSiteForm, ModifierSiteForm
@@ -43,3 +45,19 @@ class SupprimerSiteView(DeleteView):
     model = Site
     template_name = 'sites/supprimer_site.html'
     success_url = reverse_lazy('liste_sites')
+
+
+def exporter_mots_de_passe_csv(request):
+    sites = Site.objects.all()
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="mots_de_passe.csv"'
+
+    writer = csv.writer(response)
+
+    writer.writerow(['Nom', 'URL', 'Identifiant', 'Mot de passe'])
+
+    for site in sites:
+        writer.writerow([site.nom, site.url, site.identifiant, site.mot_de_passe])
+
+    return response
