@@ -1,29 +1,46 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Liste des Sites</title>
-    </head>
-    <body>
-        <h1>Liste des Sites</h1>
-        <a href="{% url 'exporter_mots_de_passe_csv' %}">Exporter les mots de passe au format CSV</a>
-        <div style="height: 30px"></div>
-        <form method="post" enctype="multipart/form-data" action="{% url 'importer_mots_de_passe_csv' %}">
-            {% csrf_token %}
-            <input type="file" name="csv_file" accept=".csv" required>
-            <button type="submit">Importer</button>
-        </form>
-        <div style="height: 50px"></div>
-        <ul>
-            {% for site in sites %}
-                <li>
-                    {{ site.nom }} - {{ site.url }} - {{ site.identifiant }} - {{ site.mot_de_passe }}
-                    <a href="{% url 'modifier_site' pk=site.pk %}">Modifier</a>
-                    <a href="{% url 'supprimer_site' pk=site.pk %}">Supprimer</a>
-                </li>
-            {% endfor %}
-        </ul>
-        <div style="height: 50px"></div>
-
-        <a href="{% url 'ajouter_site' %}">Ajouter un site</a>
-    </body>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes mots de passe enregistrés</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-semibold mb-6">Mes mots de passe enregistrés</h1>
+        <div class="flex justify-between mb-4">
+            <div class="flex items-center">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    <a href="{% url 'exporter_mots_de_passe_csv' %}" class="text-white">Exporter mes mots de passe</a>
+                </button>
+                <div class="w-px bg-gray-400 mx-2 h-full"></div>
+                <form method="post" enctype="multipart/form-data" action="{% url 'importer_mots_de_passe_csv' %}" class="mb-8 flex items-center">
+                    {% csrf_token %}
+                    <div>
+                        <input type="file" name="csv_file" accept=".csv" required class="border border-gray-300 p-2 rounded-md">
+                    </div>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 focus:outline-none focus:shadow-outline ml-2">Importer mes mots de passe</button>
+                </form>
+            </div>
+        </div>
+       
+        {% for site in sites %}
+            <div class="bg-white shadow-md rounded-lg p-4 mb-4">
+                <p><strong>{{ site.nom }}</strong> - {{ site.url }} - {{ site.identifiant }} - {{ site.mot_de_passe }}</p>
+                <div class="mt-2">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">
+                        <a href="{% url 'modifier_site' pk=site.pk %}" class="text-white">Modifier</a>
+                    </button>
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded ml-2 focus:outline-none focus:shadow-outline">
+                        <a href="{% url 'supprimer_site' pk=site.pk %}" class="text-white">Supprimer</a>
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <a href="{% url 'ajouter_site' %}" class="text-white">Ajouter un site</a>
+        </button>
+    </div>
+</body>
 </html>
