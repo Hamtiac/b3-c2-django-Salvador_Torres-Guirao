@@ -1,15 +1,37 @@
-<!-- templates/sites/ajouter_site.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un Site</title>
+    <!-- Inclure Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Ajouter un Site</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Ajouter</button>
-    </form>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="max-w-md w-full mx-auto">
+            <h1 class="text-3xl font-semibold text-center mb-6">Ajouter un Site</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="nom" class="block text-gray-700 text-sm font-bold mb-2">Nom:</label>
+                    <input type="text" id="nom" name="nom" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="mb-4">
+                    <label for="url" class="block text-gray-700 text-sm font-bold mb-2">URL:</label>
+                    <input type="text" id="url" name="url" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="mb-4">
+                    <label for="identifiant" class="block text-gray-700 text-sm font-bold mb-2">Identifiant:</label>
+                    <input type="text" id="identifiant" name="identifiant" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="mb-4">
+                    <label for="mot_de_passe" class="block text-gray-700 text-sm font-bold mb-2">Mot de passe:</label>
+                    <input type="password" id="mot_de_passe" name="mot_de_passe" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Ajouter</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
